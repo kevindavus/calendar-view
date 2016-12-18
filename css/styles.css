@@ -1,0 +1,144 @@
+.agenda {
+  margin-left: 100px;
+  width: 620px !important;
+  max-height: 720px !important;
+  min-height: 720px !important;
+  padding: 0 10px;
+  background-color: #ececec;
+  position: fixed;
+}
+
+.container {
+  margin-top: 20px;
+  /* center the element */
+  right: 0px;
+  left: 0px;
+  margin-right: auto;
+  margin-left: auto;
+  position: absolute;
+}
+
+body {
+  font-family: helvetica;
+  color: #7c7c7c;
+}
+
+.event {
+  padding-left: 10px;
+  background-color: white;
+  position: absolute;
+  word-wrap: break-word;
+  border: 1px solid #C2C2C2;
+  border-left: 4px solid #4B6EA9;
+  box-sizing: border-box;
+}
+
+.event h1 {
+  font-size: 1em;
+  line-height: .7em;
+  color: #4B6EA9;
+}
+
+.event p {
+  font-size: .7em;
+  font-style: italic;
+}
+
+.time {
+  font-size: 12px;
+  text-align: right;
+  display: block;
+  overflow: visible;
+  max-height: 17.5px !important;
+  min-height: 17.5px !important;
+  box-sizing: border-box;
+}
+
+.time-top {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.times {
+  justify-content: flex-end;
+  margin-left: 29px;
+  margin-top: -12px;
+  max-height: 720px !important;
+  min-height: 720px !important;
+  position: fixed;
+}
+
+@media screen and (min-resolution: 120dpi) and (max-resolution: 140dpi) {
+  .time {
+    font-size: 12px;
+    text-align: right;
+    display: block;
+    overflow: visible;
+    max-height: 1rem !important;
+    min-height: 1rem !important;
+    box-sizing: border-box;
+  }
+}
+
+@media screen and (min-resolution: 96dpi) and (max-resolution: 120dpi) {
+  .time {
+    font-size: 12px;
+    text-align: right;
+    display: block;
+    overflow: visible;
+    max-height: .62rem !important;
+    min-height: .62rem !important;
+    box-sizing: border-box;
+  }
+  .agenda {
+    margin-left: 120px;
+  }
+}
+
+@media screen and (min-resolution: 60dpi) and (max-resolution: 95dpi) {
+  .time {
+    font-size: 12px;
+    text-align: right;
+    display: block;
+    overflow: visible;
+    max-height: 1.1em !important;
+    min-height: 1.1em !important;
+    box-sizing: border-box;
+  }
+  .agenda {
+    margin-left: 150px;
+  }
+  .time-half {
+    display: none;
+  }
+  .event p {
+    display: none;
+  }
+  .times {
+    margin-top: -20px;
+  }
+}
+
+@media screen and (max-resolution: 59dpi) {
+  .time {
+    font-size: 12px;
+    text-align: right;
+    display: block;
+    overflow: visible;
+    max-height: .6em !important;
+    min-height: .6em !important;
+    box-sizing: border-box;
+  }
+  .agenda {
+    margin-left: 200px;
+  }
+  .time-half {
+    display: none;
+  }
+  .event p {
+    display: none;
+  }
+  .times {
+    margin-top: -30px;
+  }
+}
