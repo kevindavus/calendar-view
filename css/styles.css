@@ -54,9 +54,9 @@
             .time {
               text-align: right;
               display: block;
-              font-size: 1.5vh !important;
-              line-height: 1.5vh !important;
-              max-height: 1.5vh !important;
+              font-size: 1.49vh !important;
+              line-height: 1.49vh !important;
+              max-height: 1.49vh !important;
               box-sizing: border-box;
               overflow: hidden;
               word-wrap: normal;
@@ -68,7 +68,7 @@
             }
 
             .times {
-              margin-top: -1vh;
+              margin-top: -1.5vh;
               margin-left: 15vw;
               width: 5vw;
               max-height: 72vh !important;

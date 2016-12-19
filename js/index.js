@@ -14,131 +14,127 @@ const eventURL = "https://appcues-interviews.firebaseio.com/calendar/events.json
  * function layOutDay(events) {...}
  */
 function layOutDay(events) {
-    //indices of all overlapping events
-    let concurrentEvents = [];
-    //max number at any one time for each event
-    let maxConcurrent = [];
-    let horizOrder = [];
-    let keys = Object.keys(events); //id of each event
+  //indices of all overlapping events
+  let concurrentEvents = [];
+  //max number at any one time for each event
+  let maxConcurrent = [];
+  let horizOrder = [];
+  let keys = Object.keys(events); //id of each event
 
-    // loop through each event
-    for (let idx = 0; idx < keys.length; idx++) {
-        //max number of concurrent events for this event
-        let maxInRow = 1;
-        concurrentEvents.push([]);
-        // loop through each minute of calendar
-        for (let i = 0; i <= 720; i++) {
-            // how many events are during this minute
-            let numInRow = 1;
-            //loop through all other elements with respect to first and the given time
-            for (let idx2 = 0; idx2 < keys.length; idx2++) {
-                let isConcurrent = false;
-                if (idx != idx2) {
-                    //check if given minute is within the bounds of both events
-                    if ((events[keys[idx]].start <= i) && (events[keys[idx]].end >= i) && (events[keys[idx2]].start <= i) && (events[keys[idx2]].end >= i)) {
-                        //if the event is not already accounted for in concurrent event array, add it
-                        if (!concurrentEvents[idx].includes(idx2)) {
-                            numInRow++;
-                            concurrentEvents[idx].push(idx2);
-                        }
-                    }
-                }
-                //keep max number of concurrent events up to date
-                if (numInRow > maxInRow) {
-                    maxInRow = numInRow;
-                }
+  // loop through each event
+  for (let idx = 0; idx < keys.length; idx++) {
+    //max number of concurrent events for this event
+    let maxInRow = 1;
+    concurrentEvents.push([]);
+    // loop through each minute of calendar
+    for (let i = 0; i <= 720; i++) {
+      // how many events are during this minute
+      let numInRow = 1;
+      //loop through all other elements with respect to first and the given time
+      for (let idx2 = 0; idx2 < keys.length; idx2++) {
+        let isConcurrent = false;
+        if (idx != idx2) {
+          //check if given minute is within the bounds of both events
+          if ((events[keys[idx]].start <= i) && (events[keys[idx]].end >= i) && (events[keys[idx2]].start <= i) && (events[keys[idx2]].end >= i)) {
+            //if the event is not already accounted for in concurrent event array, add it
+            if (!concurrentEvents[idx].includes(idx2)) {
+              numInRow++;
+              concurrentEvents[idx].push(idx2);
             }
+          }
         }
-        maxConcurrent.push(maxInRow);
+        //keep max number of concurrent events up to date
+        if (numInRow > maxInRow) {
+          maxInRow = numInRow;
+        }
+      }
     }
+    maxConcurrent.push(maxInRow);
+  }
 
-    //loop through events twice to make sure widths of concurrent events will be equal
-    let reset = true;
-    for (let i = 0; i < keys.length; i++) {
-        for (let j = concurrentEvents[i].length - 1; j >= 0; j--) {
-            if (maxConcurrent[concurrentEvents[i][j]] > maxConcurrent[i]) {
-                maxConcurrent[i] = maxConcurrent[concurrentEvents[i][j]];
-            } else {
-                maxConcurrent[concurrentEvents[i][j]] = maxConcurrent[i];
-            }
-        }
+  //loop through events twice to make sure widths of concurrent events will be equal
+  let reset = true;
+  for (let i = 0; i < keys.length; i++) {
+    for (let j = concurrentEvents[i].length - 1; j >= 0; j--) {
+      if (maxConcurrent[concurrentEvents[i][j]] > maxConcurrent[i]) {
+        maxConcurrent[i] = maxConcurrent[concurrentEvents[i][j]];
+      } else {
+        maxConcurrent[concurrentEvents[i][j]] = maxConcurrent[i];
+      }
     }
-    for (let i = keys.length - 1; i >= 0; i--) {
-        for (let j = concurrentEvents[i].length - 1; j >= 0; j--) {
-            if (maxConcurrent[concurrentEvents[i][j]] > maxConcurrent[i]) {
-                maxConcurrent[i] = maxConcurrent[concurrentEvents[i][j]];
-            } else {
-                maxConcurrent[concurrentEvents[i][j]] = maxConcurrent[i];
-            }
-        }
+  }
+  for (let i = keys.length - 1; i >= 0; i--) {
+    for (let j = concurrentEvents[i].length - 1; j >= 0; j--) {
+      if (maxConcurrent[concurrentEvents[i][j]] > maxConcurrent[i]) {
+        maxConcurrent[i] = maxConcurrent[concurrentEvents[i][j]];
+      } else {
+        maxConcurrent[concurrentEvents[i][j]] = maxConcurrent[i];
+      }
     }
+  }
 
-    //one final loop to set the pixel values for each event
-    for (let i = 0; i < keys.length; i++) {
-        horizOrder.push(-1);
-        events[keys[i]].width = 31 / maxConcurrent[i];
-        events[keys[i]].height = (events[keys[i]].end - events[keys[i]].start) / 10;
-        for (let k = 0; k < maxConcurrent[i]; k++) {
-            let isTaken = false;
-            for (let j = 0; j < concurrentEvents[i].length; j++) {
-                let crossCheck = concurrentEvents[i][j];
-                if (typeof(horizOrder[crossCheck]) != "undefined") {
-                    if (horizOrder[crossCheck] == k) {
-                        isTaken = true;
-                    }
-                }
-            }
-            if (isTaken === false) {
-                horizOrder[i] = k;
-                events[keys[i]].left = (k*events[keys[i]].width);
-                events[keys[i]].top = 1 +(events[keys[i]].start / 10);
-            }
+  //one final loop to set the pixel values for each event
+  for (let i = 0; i < keys.length; i++) {
+    horizOrder.push(-1);
+    events[keys[i]].width = 31 / maxConcurrent[i];
+    events[keys[i]].height = (events[keys[i]].end - events[keys[i]].start) / 10;
+    for (let k = 0; k < maxConcurrent[i]; k++) {
+      let isTaken = false;
+      for (let j = 0; j < concurrentEvents[i].length; j++) {
+        let crossCheck = concurrentEvents[i][j];
+        if (typeof(horizOrder[crossCheck]) != "undefined") {
+          if (horizOrder[crossCheck] == k) {
+            isTaken = true;
+          }
         }
-          console.log("key: "+keys[i]+"\nstart: " +events[keys[i]].start+"\nend: " +events[keys[i]].end+"\nleft: " +events[keys[i]].left);
+      }
+      if (isTaken === false) {
+        horizOrder[i] = k;
+        events[keys[i]].left = (k * events[keys[i]].width);
+        events[keys[i]].top = 1 + (events[keys[i]].start / 10);
+      }
     }
-    console.log(events);
-    return events;
+    console.log("key: " + keys[i] + "\nstart: " + events[keys[i]].start + "\nend: " + events[keys[i]].end + "\nleft: " + events[keys[i]].left);
+  }
+  return events;
 
 }
 let request = $.ajax({url: eventURL});
 
 request.done(function(data) {
-    console.log(data);
-    //retrieve formatting
-    let events = layOutDay(data);
-    for (let key in events) {
-        let item = events[key];
-        //use object properties to print out to screen
-        $(".agenda").append("<div class='event' style='min-width:" + item.width + "vw !important;  max-width:" +
-          item.width + "vw !important; margin-left:" + item.left + "vw; margin-top:" + item.top + "vh; height:" +
-          item.height + "vh !important;'><h1>Sample Event</h1><p>Sample Location</p></div>");
-    }
+  //retrieve formatting
+  let events = layOutDay(data);
+  for (let key in events) {
+    let item = events[key];
+    //use object properties to print out to screen
+    $(".agenda").append("<div class='event' style='min-width:" + item.width + "vw !important;  max-width:" + item.width + "vw !important; margin-left:" + item.left + "vw; margin-top:" + item.top + "vh; height:" + item.height + "vh !important;'><h1>Sample Event</h1><p>Sample Location</p></div>");
+  }
 });
 request.fail(function() {
-    $(document).innerHTML = 'There has been an error in retrieving the agenda information';
+  $(document).innerHTML = 'There has been an error in retrieving the agenda information';
 });
 $(document).ready(function() {
-    let topOfHour = true;
-    for (let i = 0; i <= 720; i += 30) {
-        let isMorning = i < 180;
-        let hour = Math.floor((i / 60) + 9) % 12;
-        if (hour === 0) {
-            hour = 12;
-        }
-        let outTime;
-        if (topOfHour) {
-            outTime = "<p class='time'> <span class='time-top'>" + hour + ":00</span>";
-            if (isMorning) {
-                outTime += " AM</p>";
-            } else {
-                outTime += " PM</p>";
-            }
-        } else {
-
-            outTime = "<p class='time time-half'>" + hour + ":30</p>";
-        }
-        $('.times').append(outTime);
-        //alternate between :00 and :30
-        topOfHour = !topOfHour;
+  let topOfHour = true;
+  for (let i = 0; i <= 720; i += 30) {
+    let isMorning = i < 180;
+    let hour = Math.floor((i / 60) + 9) % 12;
+    if (hour === 0) {
+      hour = 12;
     }
+    let outTime;
+    if (topOfHour) {
+      outTime = "<p class='time'> <span class='time-top'>" + hour + ":00</span>";
+      if (isMorning) {
+        outTime += " AM</p>";
+      } else {
+        outTime += " PM</p>";
+      }
+    } else {
+
+      outTime = "<p class='time time-half'>" + hour + ":30</p>";
+    }
+    $('.times').append(outTime);
+    //alternate between :00 and :30
+    topOfHour = !topOfHour;
+  }
 });
