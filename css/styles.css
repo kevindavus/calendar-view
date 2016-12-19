@@ -1,124 +1,77 @@
-.agenda {
-  margin-left: 100px;
-  width: 620px !important;
-  max-height: 720px !important;
-  min-height: 720px !important;
-  padding: 0 10px;
-  background-color: #ececec;
-  position: fixed;
-}
+            .agenda {
+              margin-left: 22vw;
+              margin-top: 10vh;
+              width: 31vw !important;
+              max-height: 72vh !important;
+              min-height: 72vh !important;
+              padding: 0 1vw;
+              background-color: #ececec;
+              position: relative;
+            }
 
-.container {
-  margin-top: 20px;
-  /* center the element */
-  right: 0px;
-  left: 0px;
-  margin-right: auto;
-  margin-left: auto;
-  position: absolute;
-}
+            .container {
+              margin-top: 10vh;
+              /* center the element */
+              right: 0px;
+              left: 0px;
+              margin-right: auto;
+              margin-left: auto;
+              position: relative;
+            }
 
-body {
-  font-family: helvetica;
-  color: #7c7c7c;
-}
+            body {
+              font-family: helvetica;
+              color: #7c7c7c;
+            }
 
-.event {
-  padding-left: 10px;
-  background-color: white;
-  position: absolute;
-  word-wrap: break-word;
-  border: 1px solid #C2C2C2;
-  border-left: 4px solid #4B6EA9;
-  box-sizing: border-box;
-}
+            .event {
+              overflow: hidden;
+              padding-left: 1vw;
+              background-color: white;
+              position: absolute;
+              border: 0.1vw solid #C2C2C2;
+              border-left: 0.3vw solid #4B6EA9;
+              box-sizing: border-box;
+              line-height: 1vh;
+            }
 
-.event h1 {
-  font-size: 1em;
-  line-height: .7em;
-  color: #4B6EA9;
-}
+            .event h1 {
+              word-wrap: no-wrap;
+              overflow: hidden;
+              font-size: 2vh;
+              line-height: 2vh;
+              color: #4B6EA9;
+            }
 
-.event p {
-  font-size: .7em;
-  font-style: italic;
-}
+            .event p {
+              overflow: hidden;
+              font-size: 1.5vh;
+              line-height: 1.5vh;
+              margin-top: -.5vh;
+              font-style: italic;
+            }
 
-.time {
-  font-size: 13.5px;
-  text-align: right;
-  display: block;
-  overflow: visible;
-  max-height: 16px !important;
-  min-height: 16px !important;
-  box-sizing: border-box;
-}
+            .time {
+              text-align: right;
+              display: block;
+              font-size: 1.5vh !important;
+              line-height: 1.5vh !important;
+              max-height: 1.5vh !important;
+              box-sizing: border-box;
+              overflow: hidden;
+              word-wrap: normal;
+            }
 
-.time-top {
-  font-weight: 600;
-  font-size: 16px;
-}
+            .time-top {
+              font-weight: 600;
+              font-size: 1.7vh;
+            }
 
-.times {
-  justify-content: flex-end;
-  margin-left: 29px;
-  margin-top: -12px;
-  max-height: 720px !important;
-  min-height: 720px !important;
-  position: fixed;
-}
-
-@media screen and (min-resolution: 120dpi) and (max-resolution: 130dpi) {
-  .time {
-    max-height: 16px !important;
-    min-height: 16px !important;
-  }
-}
-
-@media screen and (min-resolution: 96dpi) and (max-resolution: 119dpi) {
-  .time {
-    max-height: 11px !important;
-    min-height: 11px !important;
-  }
-  .agenda {
-    margin-left: 120px;
-  }
-}
-
-@media screen and (min-resolution: 60dpi) and (max-resolution: 95dpi) {
-  .time {
-    max-height: 30px !important;
-    min-height: 30px !important;
-  }
-  .agenda {
-    margin-left: 150px;
-  }
-  .time-half {
-    display: none;
-  }
-  .event p {
-    display: none;
-  }
-  .times {
-    margin-top: -20px;
-  }
-}
-
-@media screen and (max-resolution: 59dpi) {
-  .time {
-    max-height: 20px !important;
-    min-height: 20px !important;
-  }
-  .agenda {
-    margin-left: 200px;
-  }
-  .time-half {
-    display: none;
-  }
-  .event p {
-    display: none;
-  }
-  .times {
-    margin-top: -30px;
-  }
-}
+            .times {
+              margin-top: -1vh;
+              margin-left: 15vw;
+              width: 5vw;
+              max-height: 72vh !important;
+              min-height: 72vh !important;
+              position: fixed;
+            }
