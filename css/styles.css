@@ -45,12 +45,12 @@ body {
 }
 
 .time {
-  font-size: 12px;
+  font-size: 13.5px;
   text-align: right;
   display: block;
   overflow: visible;
-  max-height: 17.5px !important;
-  min-height: 17.5px !important;
+  max-height: 16px !important;
+  min-height: 16px !important;
   box-sizing: border-box;
 }
 
@@ -68,27 +68,17 @@ body {
   position: fixed;
 }
 
-@media screen and (min-resolution: 120dpi) and (max-resolution: 140dpi) {
+@media screen and (min-resolution: 120dpi) and (max-resolution: 130dpi) {
   .time {
-    font-size: 12px;
-    text-align: right;
-    display: block;
-    overflow: visible;
-    max-height: 1rem !important;
-    min-height: 1rem !important;
-    box-sizing: border-box;
+    max-height: 16px !important;
+    min-height: 16px !important;
   }
 }
 
-@media screen and (min-resolution: 96dpi) and (max-resolution: 120dpi) {
+@media screen and (min-resolution: 96dpi) and (max-resolution: 119dpi) {
   .time {
-    font-size: 12px;
-    text-align: right;
-    display: block;
-    overflow: visible;
-    max-height: .62rem !important;
-    min-height: .62rem !important;
-    box-sizing: border-box;
+    max-height: 11px !important;
+    min-height: 11px !important;
   }
   .agenda {
     margin-left: 120px;
@@ -97,13 +87,8 @@ body {
 
 @media screen and (min-resolution: 60dpi) and (max-resolution: 95dpi) {
   .time {
-    font-size: 12px;
-    text-align: right;
-    display: block;
-    overflow: visible;
-    max-height: 1.1em !important;
-    min-height: 1.1em !important;
-    box-sizing: border-box;
+    max-height: 30px !important;
+    min-height: 30px !important;
   }
   .agenda {
     margin-left: 150px;
@@ -121,13 +106,8 @@ body {
 
 @media screen and (max-resolution: 59dpi) {
   .time {
-    font-size: 12px;
-    text-align: right;
-    display: block;
-    overflow: visible;
-    max-height: .6em !important;
-    min-height: .6em !important;
-    box-sizing: border-box;
+    max-height: 20px !important;
+    min-height: 20px !important;
   }
   .agenda {
     margin-left: 200px;
