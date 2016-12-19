@@ -8,7 +8,7 @@ The **LayOutDay** function that takes in the JSON object and returns a object wi
 To view the final result open **index.html** index.html</a>. You will need internet access to reach the JSON, or the link can be changed on the first line of **/js/index.js**.
 
 
-![Demo layout](./tree/master/images/screenshot.png)
+![Demo layout](./images/screenshot.png)
  _The times in the gist don't quite line up with the times provided in the JSON_
 
 
